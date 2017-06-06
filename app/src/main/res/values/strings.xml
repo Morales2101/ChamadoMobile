@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Busca Reclamacao</string>
+    <string name="nome_busca">Nome do usuario</string>
+    <string name="botao_busca">Buscar</string>
+    <string name="label_reclamacao_id">id:</string>
+    <string name="label_reclamacao_nome">Nome:</string>
+    <string name="label_reclamacao_titulo">Titulo:</string>
+    <string name="label_reclamacao_descricao">Descricao:</string>
+
+</resources>

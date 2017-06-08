@@ -11,6 +11,7 @@ public class Reclamacao implements Serializable, Comparable<Reclamacao> {
     private String titulo;
     private String descricao;
 
+
     public Reclamacao(Integer id, String nome, String titulo, String descricao) {
        this.id = id;
         this.nome = nome;

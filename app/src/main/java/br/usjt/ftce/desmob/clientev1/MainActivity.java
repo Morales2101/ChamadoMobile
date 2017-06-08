@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textNome = (EditText) findViewById(R.id.buscar_clientes);
+        textNome = (EditText) findViewById(R.id.email);
     }
 
     public void buscarCliente(View view) {

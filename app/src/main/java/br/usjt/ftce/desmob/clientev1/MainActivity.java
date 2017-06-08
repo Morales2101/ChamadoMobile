@@ -66,7 +66,6 @@ public class MainActivity extends Activity {
                                 for(int i = 0 ; i < listaus.size(); i++){
                                 if (listaus.get(i).getEmail().equals(tEmail) && listaus.get(i).getSenha().equals(tSenha)) {
 
-
                                         intent = new Intent(MainActivity.this, ListarReclamacaoActivity.class);
                                         intent.putExtra(LISTA, lista);
                                         startActivity(intent);

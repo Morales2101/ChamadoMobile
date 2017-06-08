@@ -13,31 +13,43 @@ import java.util.ArrayList;
 public class ListarReclamacaoActivity extends Activity {
     ListView listView;
     Reclamacao[] lista;
+    Usuario[] listaus;
+
+  //  EditText senha = (EditText) findViewById(R.id.senha);
     public static final String RECLAMACAO = "br.usjt.ftce.desmob.clientev1.nome";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listar_clientes);
 
-        listView = (ListView) findViewById(R.id.lista_de_reclamacoes);
         Intent intent = getIntent();
-        //String chave = intent.getStringExtra(MainActivity.CHAVE);
-        //lista = Data.buscaClientes(chave);
         ArrayList<Reclamacao> reclamacoes = (ArrayList<Reclamacao>) intent.getSerializableExtra(MainActivity.LISTA);
-        lista = reclamacoes.toArray(new Reclamacao[0]);
-        BaseAdapter adapter = new ReclamacaoAdapter(this, lista);
-        listView.setAdapter(adapter);
+
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.activity_listar_clientes);
+
+
+                listView = (ListView) findViewById(R.id.lista_de_reclamacoes);
+
+                //String chave = intent.getStringExtra(MainActivity.CHAVE);
+                //lista = Data.buscaClientes(chave);
+
+                lista = reclamacoes.toArray(new Reclamacao[0]);
+                BaseAdapter adapter = new ReclamacaoAdapter(this, lista);
+                listView.setAdapter(adapter);
+
+
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long l) {
-                Intent intent1 = new Intent(ListarReclamacaoActivity.this, DetallheReclamacaoActivity.class);
-                intent1.putExtra(RECLAMACAO, lista[posicao]);
-                startActivity(intent1);
+            public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long l){
+            Intent intent1 = new Intent(ListarReclamacaoActivity.this, DetallheReclamacaoActivity.class);
+            intent1.putExtra(RECLAMACAO, lista[posicao]);
+            startActivity(intent1);
 
-            }
+
+        }
         });
     }
 

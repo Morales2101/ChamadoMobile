@@ -21,6 +21,7 @@
         android:id="@+id/senha"
         android:layout_width="360dp"
         android:layout_height="wrap_content"
+        android:password="true"
         android:hint="@string/senha" />
 
 

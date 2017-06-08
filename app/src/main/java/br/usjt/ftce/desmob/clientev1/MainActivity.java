@@ -13,14 +13,18 @@ import java.util.ArrayList;
 public class MainActivity extends Activity {
     EditText textNome;
     ArrayList<Reclamacao> lista;
+    ArrayList<Usuario> listaus;
     ReclamacaoRequester reclamacaoResquester;
+    UsuarioRequester usuarioRequester;
     Intent intent;
     String chave;
     public static final String LISTA = "br.usjt.ftce.desmob.clientev1.lista";
+
    public static final String CHAVE = "br.usjt.ftce.desmob.clientev1.busca";
     public static final String SERVIDOR = "http://192.168.56.1:8080";
     public static final String APPSTRING = "/ProjetoMobile";
     public static final String RECURSO = "/rest/locais";
+    public static final String RECURSOUSUARIO = "/rest/locais/usuario";
 
 
 
@@ -38,8 +42,8 @@ public class MainActivity extends Activity {
         chave = textNome.getText().toString();
         //intent.putExtra(CHAVE, nome);
         reclamacaoResquester = new ReclamacaoRequester();
+        usuarioRequester = new UsuarioRequester();
         String alo = SERVIDOR + APPSTRING + RECURSO;
-        System.out.println("ALO: " + alo);
         if (reclamacaoResquester.isConnected(this)) {
             new Thread(new Runnable() {
                 @Override
@@ -47,12 +51,29 @@ public class MainActivity extends Activity {
                     try {
 
                         lista = reclamacaoResquester.get(SERVIDOR + APPSTRING + RECURSO, chave);
+                        listaus = usuarioRequester.get(SERVIDOR + APPSTRING + RECURSOUSUARIO, CHAVE);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                intent = new Intent(MainActivity.this, ListarReclamacaoActivity.class);
-                                intent.putExtra(LISTA, lista);
-                                startActivity(intent);
+                                EditText sEmail = (EditText) findViewById(R.id.email);
+                                EditText sSenha = (EditText) findViewById(R.id.senha);
+                                String tEmail = sEmail.getText().toString();
+                                String tSenha = sSenha.getText().toString();
+
+                          //      Log.v("SENHA DIGITADA :", tSenha);
+                                // Log.v("SENHA Recebida :", lista.get(3).getEmail());
+
+                                for(int i = 0 ; i < listaus.size(); i++){
+                                if (listaus.get(i).getEmail().equals(tEmail) && listaus.get(i).getSenha().equals(tSenha)) {
+
+
+                                        intent = new Intent(MainActivity.this, ListarReclamacaoActivity.class);
+                                        intent.putExtra(LISTA, lista);
+                                        startActivity(intent);
+                                }
+
+
+                                }
                             }
                         });
                     } catch (IOException e) {

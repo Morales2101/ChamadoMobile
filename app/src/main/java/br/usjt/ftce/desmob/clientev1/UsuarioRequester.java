@@ -21,12 +21,12 @@ import okhttp3.Response;
 /**
  * Created by arqdsis on 31/03/2017.
  */
-public class ReclamacaoRequester {
+public class UsuarioRequester {
 
     OkHttpClient client = new OkHttpClient();
 
-    public ArrayList<Reclamacao> get(String url, String chave) throws IOException {
-        ArrayList<Reclamacao> lista = new ArrayList<>();
+    public ArrayList<Usuario> get(String url, String chave) throws IOException {
+        ArrayList<Usuario> lista = new ArrayList<>();
 
         Request request = new Request.Builder().url(url).build();
         Response response = client.newCall(request).execute(); //error aqui
@@ -37,18 +37,11 @@ public class ReclamacaoRequester {
             for (int i = 0; i < root.length(); i++) {
                JSONObject item = root.getJSONObject(i);
                 int id = item.getInt("id");
-                String nome = item.getJSONObject("cidadao").getString("nome");
-                Boolean aprovado = item.getBoolean("aprovado");
-                String dataHora = item.getString("dataHora");
-                String titulo = item.getString("titulo");
-                String descricao = item.getString("descricao");
-                String resposta = item.getString("resposta");
-                int idavaliador = item.getJSONObject("cidadao").getInt("id");
-                int idCidadao = item.getJSONObject("cidadao").getInt("id");
-                String email = item.getJSONObject("cidadao").getString("email");
-                String senha = item.getJSONObject("cidadao").getString("senha");
-                Reclamacao reclamacao = new Reclamacao(id, nome, aprovado, dataHora, titulo, descricao, resposta, idavaliador, idCidadao, email, senha);
-                lista.add(reclamacao);
+                String email = item.getString("email");
+                String senha = item.getString("senha");
+                String tipo = item.getString("tipo");
+                Usuario usuario = new Usuario(id, email, senha, tipo);
+                lista.add(usuario);
             }
 
         } catch (JSONException e) {
